@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ChevronDown, ArrowRight } from 'lucide-react'
 
 export function Hero() {
@@ -84,10 +85,11 @@ export function Hero() {
             <div className="relative animate-levitate">
               <div className="relative z-10 h-[600px] w-[420px] rounded-[3.5rem] bg-surface-2 border border-white/10 shadow-[var(--glow-product)] overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent z-10 pointer-events-none" />
-                <img 
+                <Image 
                   src="/assets/images/hero_laptop.png" 
                   alt="Premium Tech Showcase" 
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                  fill
+                  className="object-cover transition-transform duration-700 hover:scale-110"
                 />
                 <div className="absolute bottom-12 inset-x-0 text-center z-20">
                     <span className="text-text-1 font-syne text-sm font-bold tracking-[0.3em] uppercase opacity-50">Experimental Tech</span>

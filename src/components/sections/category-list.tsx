@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ChevronRight } from 'lucide-react'
 
 export async function CategoryList() {
@@ -40,10 +41,11 @@ export async function CategoryList() {
                 className="group relative flex flex-col items-center gap-6 rounded-[2rem] bg-surface-2 p-8 text-center border border-white/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-[var(--shadow-hover)] hover:border-primary/30"
               >
                 <div className="relative flex h-24 w-24 items-center justify-center rounded-[2rem] bg-surface border border-white/5 transition-all duration-500 group-hover:scale-110 group-hover:bg-primary/5 overflow-hidden">
-                  <img 
+                  <Image 
                     src={displayImage} 
                     alt={category.name} 
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700" 
+                    fill
+                    className="object-cover transition-transform duration-700" 
                   />
                   <div className="absolute inset-x-0 -bottom-4 h-8 w-full bg-primary/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>

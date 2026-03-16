@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { Eye, ShoppingCart } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { formatPrice } from '@/lib/utils'
 
@@ -15,7 +15,7 @@ interface ProductCardProps {
   image?: string
 }
 
-export function ProductCard({ id, name, slug, price, installmentPrice, image }: ProductCardProps) {
+export function ProductCard({ name, slug, price, installmentPrice, image }: ProductCardProps) {
   const displayImage = image || (name.includes('iPhone') ? '/assets/images/iphone_15.png' : name.includes('Mac') ? '/assets/images/macbook_pro.png' : '/assets/images/hero_laptop.png')
 
   return (
@@ -25,10 +25,11 @@ export function ProductCard({ id, name, slug, price, installmentPrice, image }: 
       
       <Link href={`/catalog/${slug}`} className="relative z-10 block">
         <div className="relative mb-6 aspect-square overflow-hidden rounded-[2rem] bg-surface border border-white/5">
-          <img 
+          <Image 
             src={displayImage} 
             alt={name} 
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
           />
           {/* Top Selection Badge */}
           <div className="absolute top-4 left-4 px-3 py-1 bg-primary/20 backdrop-blur-md rounded-full text-[8px] font-bold uppercase tracking-[0.2em] text-primary border border-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">

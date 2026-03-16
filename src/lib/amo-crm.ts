@@ -1,4 +1,4 @@
-import axios from 'axios'
+// This is a placeholder for actual amoCRM API logic
 
 interface LeadData {
   type: string
@@ -33,7 +33,7 @@ class AmoCRMService {
     return { success: true, dealId: 'mock_deal_123' }
   }
 
-  private async getContactByPhone(phone: string) {
+  private async getContactByPhone(_phone: string) {
     // Search for contact by phone to avoid duplicates
   }
 }
