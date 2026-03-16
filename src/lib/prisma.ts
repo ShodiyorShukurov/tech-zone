@@ -29,9 +29,12 @@ export const prisma =
     errorFormat: 'pretty',
   })
 
-// Add diagnostic logging for database connection issues
-if (!isProduction) {
+// Add diagnostic logging to help identify why Prisma fails in production
+if (isProduction) {
+  prisma.$connect()
+    .then(() => console.log('Prisma successfully connected to database'))
+    .catch((err) => console.error('Prisma connection error:', err))
+} else {
   console.log('Prisma initialized with resolved URL:', dbUrl)
+  globalForPrisma.prisma = prisma
 }
-
-if (!isProduction) globalForPrisma.prisma = prisma
