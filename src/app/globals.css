@@ -2,26 +2,150 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Brand Colors */
+    --color-bg: 240 10% 3.9%;        /* #0A0A0F */
+    --color-surface: 240 10% 6.9%;   /* #111118 */
+    --color-surface-2: 240 10% 12.2%; /* #1A1A24 */
+    --color-border: 240 10% 19.2%;   /* #2A2A38 */
+    --color-accent: 217 91% 64%;     /* #4F8EF7 */
+    --color-accent-2: 258 90% 76%;   /* #A78BFA */
+    --color-success: 161 64% 51%;    /* #34D399 */
+    --color-warning: 38 92% 56%;     /* #FBBF24 */
+    --color-text-1: 240 10% 96.5%;   /* #F0F0F8 */
+    --color-text-2: 240 10% 61.2%;   /* #9090A8 */
+    --color-text-3: 240 10% 37.5%;   /* #55556A */
+
+    /* Shadcn compatibility vars mapped to new design system */
+    --background: var(--color-bg);
+    --foreground: var(--color-text-1);
+    --card: var(--color-surface);
+    --card-foreground: var(--color-text-1);
+    --popover: var(--color-surface);
+    --popover-foreground: var(--color-text-1);
+    --primary: var(--color-accent);
+    --primary-foreground: 210 40% 98%;
+    --secondary: var(--color-surface-2);
+    --secondary-foreground: var(--color-text-1);
+    --muted: var(--color-surface-2);
+    --muted-foreground: var(--color-text-2);
+    --accent: var(--color-surface-2);
+    --accent-foreground: var(--color-text-1);
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: var(--color-border);
+    --input: var(--color-border);
+    --ring: var(--color-accent);
+
+    /* Radius scale */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 32px;
+    --radius: var(--radius-md);
+
+    /* Spacing mapped to px for reference, used via Tailwind or vars */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+    --space-9: 96px;
+    --space-10: 128px;
+
+    /* Shadows & Effects */
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+    --shadow-hover: 0 8px 40px rgba(79, 142, 247, 0.15);
+    --shadow-cta: 0 4px 20px rgba(79, 142, 247, 0.35);
+    --glow-accent: 0 0 40px rgba(79, 142, 247, 0.2);
+    --glow-product: 0 20px 60px rgba(0, 0, 0, 0.6);
+    
+    --color-gradient: linear-gradient(135deg, #4F8EF7 0%, #A78BFA 100%);
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-border outline-none transition-colors duration-200;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-dm-sans), sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-syne), sans-serif;
+    font-weight: 700;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent);
+  }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-[20px] border border-white/10;
   }
+
+  .btn-gradient {
+    background: var(--color-gradient);
+    @apply text-white shadow-[var(--shadow-cta)] hover:opacity-90 active:scale-95 transition-all;
+  }
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, #1A1A24 25%, #22222E 50%, #1A1A24 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes levitate {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-levitate {
+  animation: levitate 4s ease-in-out infinite;
 }

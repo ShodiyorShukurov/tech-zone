@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  image     String?   @default("/placeholders/category.png")
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Product {
+  id               String   @id @default(cuid())
+  name             String
+  slug             String   @unique
+  description      String?
+  price            Float
+  installmentPrice Float?
+  images           String   @default("[]") // JSON string array
+  specs            String   @default("{}") // JSON object
+  categoryId       String
+  category         Category @relation(fields: [categoryId], references: [id])
+  popular          Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Lead {
+  id          String   @id @default(cuid())
+  type        String   // CALLBACK, INSTALLMENT, PRODUCT
+  status      String   @default("NEW") // NEW, SYNCED, ERROR
+  name        String?
+  phone       String
+  productName String?
+  pageUrl     String?
+  utmSource   String?
+  utmMedium   String?
+  utmCampaign String?
+  utmContent  String?
+  utmTerm     String?
+  amoDealId   String?
+  errorMessage String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
