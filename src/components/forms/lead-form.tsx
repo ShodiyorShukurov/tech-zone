@@ -49,14 +49,14 @@ export function LeadForm({ type, productName, className, onSuccess }: LeadFormPr
       if (onSuccess) setTimeout(onSuccess, 2000)
       
       // GTM Event
-      if (typeof window !== 'undefined' && (window as any).dataLayer) {
-        ;(window as any).dataLayer.push({
+      if (typeof window !== 'undefined' && (window as unknown as { dataLayer: unknown[] }).dataLayer) {
+        ;(window as unknown as { dataLayer: unknown[] }).dataLayer.push({
           event: 'form_submit',
           form_type: type,
           product_name: productName || 'General',
         })
       }
-    } catch (err) {
+    } catch {
       setError('Произошла ошибка. Пожалуйста, попробуйте позже.')
     } finally {
       setLoading(false)

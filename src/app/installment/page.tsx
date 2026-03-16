@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button'
 import { LeadForm } from '@/components/forms/lead-form'
 import { CheckCircle2, CreditCard, ShieldCheck, Zap } from 'lucide-react'
 

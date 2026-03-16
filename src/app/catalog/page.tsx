@@ -152,6 +152,6 @@ export default async function CatalogPage({ searchParams }: CatalogPageProps) {
   )
 }
 
-function cn(...classes: any[]) {
+function cn(...classes: unknown[]) {
   return classes.filter(Boolean).join(' ')
 }

@@ -1,4 +1,4 @@
-import { MapPin, Phone, Clock, Navigation, ArrowRight } from 'lucide-react'
+import { MapPin, Phone, Clock, Navigation } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 

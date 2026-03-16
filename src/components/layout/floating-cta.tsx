@@ -2,10 +2,8 @@
 
 import { useState } from 'react'
 import { Phone, Send, MessageSquare } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { Modal } from '@/components/ui/modal'
 import { LeadForm } from '@/components/forms/lead-form'
-import { cn } from '@/lib/utils'
 
 export function FloatingCTA() {
   const [isOpen, setIsOpen] = useState(false)
@@ -15,7 +13,7 @@ export function FloatingCTA() {
       <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-4">
         <div className="flex flex-col gap-3">
           <a
-            href="https://t.me/yourusername"
+            href="https://t.me/sardorsobidjonov"
             target="_blank"
             rel="noopener noreferrer"
             className="flex h-12 w-12 items-center justify-center rounded-full bg-[#0088cc] text-white shadow-lg transition-transform hover:scale-110"

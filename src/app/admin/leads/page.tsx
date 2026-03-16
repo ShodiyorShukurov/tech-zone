@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma'
-import { CheckCircle, XCircle, Clock, ExternalLink, Filter, Download, MessageSquare } from 'lucide-react'
+import { ExternalLink, Filter, Download, MessageSquare } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export default async function AdminLeads() {

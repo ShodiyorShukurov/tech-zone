@@ -1,6 +1,5 @@
-import { Phone, Mail, MapPin, Instagram, Facebook, Send, Clock, ArrowRight } from 'lucide-react'
+import { Phone, Mail, MapPin, Instagram, Facebook, Send, Clock } from 'lucide-react'
 import { LeadForm } from '@/components/forms/lead-form'
-import { Button } from '@/components/ui/button'
 
 export default function ContactsPage() {
   const contactInfo = [

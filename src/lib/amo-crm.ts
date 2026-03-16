@@ -33,7 +33,7 @@ class AmoCRMService {
     return { success: true, dealId: 'mock_deal_123' }
   }
 
-  private async getContactByPhone(_phone: string) {
+  private async getContactByPhone() {
     // Search for contact by phone to avoid duplicates
   }
 }

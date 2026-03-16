@@ -1,14 +1,24 @@
 'use client'
 
-import { formatPrice } from '@/lib/utils'
+import { formatPrice, cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import { ShieldCheck, Truck, CreditCard, ChevronRight, Minus, Plus } from 'lucide-react'
+import Image from 'next/image'
+import { ShieldCheck, Truck, CreditCard, Minus, Plus } from 'lucide-react'
 import { useState } from 'react'
 import { Modal } from '@/components/ui/modal'
 import { LeadForm } from '@/components/forms/lead-form'
 
 interface ProductDetailProps {
-  product: any
+  product: {
+    name: string;
+    specs?: string | null;
+    description: string | null;
+    price: number;
+    installmentPrice?: number | null;
+    category?: {
+      name: string;
+    } | null;
+  }
 }
 
 export function ProductDetail({ product }: ProductDetailProps) {
@@ -32,19 +42,21 @@ export function ProductDetail({ product }: ProductDetailProps) {
           <div className="aspect-[4/5] rounded-[3rem] bg-surface-2 flex items-center justify-center overflow-hidden border border-white/5 shadow-[var(--glow-product)] group relative">
              {/* Gradient Overlay */}
              <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-10" />
-             <img 
+             <Image 
                src={primaryImage} 
                alt={product.name} 
-               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+               fill
+               className="object-cover transition-transform duration-700 group-hover:scale-110"
              />
           </div>
           <div className="grid grid-cols-4 gap-4">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="aspect-square rounded-2xl bg-surface border border-white/5 flex items-center justify-center cursor-pointer transition-all hover:border-primary/50 hover:bg-primary/5 overflow-hidden group">
-                <img 
+              <div key={i} className="aspect-square rounded-2xl bg-surface border border-white/5 flex items-center justify-center cursor-pointer transition-all hover:border-primary/50 hover:bg-primary/5 overflow-hidden group relative">
+                <Image 
                   src={primaryImage} 
                   alt={`${product.name} View ${i}`} 
-                  className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity"
+                  fill
+                  className="object-cover opacity-50 group-hover:opacity-100 transition-opacity"
                 />
               </div>
             ))}
@@ -132,7 +144,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
                 ].map((tab) => (
                     <button
                         key={tab.id}
-                        onClick={() => setActiveTab(tab.id as any)}
+                        onClick={() => setActiveTab(tab.id as 'DESC' | 'SPECS')}
                         className={cn(
                             "pb-4 text-xs font-bold uppercase tracking-widest transition-all relative",
                             activeTab === tab.id ? "text-primary" : "text-text-3 hover:text-text-1"
@@ -184,6 +196,3 @@ export function ProductDetail({ product }: ProductDetailProps) {
   )
 }
 
-function cn(...classes: any[]) {
-  return classes.filter(Boolean).join(' ')
-}
